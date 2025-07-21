@@ -1,11 +1,16 @@
+require('dotenv').config(); // Carga las variables de entorno
+
 const express = require('express');
 const mongoose = require('mongoose');
-const router = require('./routes/index'); // Tu router principal
+
+const router = require('./routes/index');  // Tu router principal
 const testRouter = require('./routes/test'); // Ruta de prueba MongoDB
-require('dotenv').config();
 
 const app = express();
 const port = process.env.PORT || 3000;
+
+// Mostrar la variable de entorno para depuración
+console.log('Mongo URI:', process.env.MONGODB_URI);
 
 // Conexión a MongoDB
 mongoose.connect(process.env.MONGODB_URI, {
@@ -20,7 +25,7 @@ app.use(express.json());
 // Rutas principales
 app.use('/', router);
 
-// ✅ Ruta de prueba de base de datos
+// Ruta de prueba para verificar base de datos
 app.use('/api/test-db', testRouter);
 
 app.listen(port, () => {
