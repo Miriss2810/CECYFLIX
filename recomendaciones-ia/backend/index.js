@@ -6,8 +6,8 @@ require('dotenv').config();
 const app = express();
 const port = process.env.PORT || 3000;
 
-// 🔧 CAMBIO AQUÍ: Usar la variable correcta que configuraste en Render
-mongoose.connect(process.env.MONGO_URI, {
+// Conectar a MongoDB usando la variable de entorno correcta
+mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
@@ -16,7 +16,7 @@ mongoose.connect(process.env.MONGO_URI, {
 
 app.use(express.json());
 
-// Usa el router en la ruta raíz
+// Usar el router en la ruta raíz
 app.use('/', router);
 
 app.listen(port, () => {
